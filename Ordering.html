@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Store</title>
+</head>
+
+<body>
+
+<h1>Welcome to My Store</h1>
+
+<script>
+
+alert("Welcome to my store!");
+
+var name = prompt("What is your name?");
+var item = prompt("What item do you want?");
+var quantity = prompt("How many items do you want? (1-99)");
+
+var today = new Date();
+today.setDate(today.getDate() + 7);
+
+document.write("<h2>Thank you for ordering!</h2>");
+document.write("Name: " + name + "<br>");
+document.write("Item: " + item + "<br>");
+document.write("Quantity: " + quantity + "<br>");
+document.write("Your order will arrive on: " + today);
+
+</script>
+
+</body>
+</html>
