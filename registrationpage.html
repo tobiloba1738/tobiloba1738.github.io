@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Page</title>
+</head>
+
+<body>
+
+  <h2>Simple Registration</h2>
+
+  <form id="form">
+    First Name: <input type="text" id="firstName"><br><br>
+    Last Name: <input type="text" id="lastName"><br><br>
+    Email: <input type="text" id="email"><br><br>
+    Password: <input type="password" id="password"><br><br>
+    Date of Birth: <input type="date" id="dob"><br><br>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <div id="output"></div>
+
+  <script>
+    document.getElementById("form").addEventListener("submit", function(event) {
+
+      event.preventDefault(); // stop page refresh
+
+      // get values
+      let first = document.getElementById("firstName").value;
+      let last = document.getElementById("lastName").value;
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      let dob = document.getElementById("dob").value;
+
+      // check if any field is empty
+      if (first === "" || last === "" || email === "" || password === "" || dob === "") {
+        document.getElementById("output").innerHTML = "Registration Failed: Fill all fields";
+        return;
+      }
+
+      // check password for ! or ?
+      if (password.indexOf("!") === -1 && password.indexOf("?") === -1) {
+        document.getElementById("output").innerHTML = "Registration Failed: Password needs ! or ?";
+        return;
+      }
+
+      // turn password into stars
+      let stars = "";
+      for (let i = 0; i < password.length; i++) {
+        stars = stars + "*";
+      }
+
+      // create user object
+      let user = {
+        firstName: first,
+        lastName: last,
+        email: email,
+        password: stars,
+        dob: dob
+      };
+
+      // show result
+      document.getElementById("output").innerHTML =
+        "Registration Successful<br><br>" +
+        "First Name: " + user.firstName + "<br>" +
+        "Last Name: " + user.lastName + "<br>" +
+        "Email: " + user.email + "<br>" +
+        "Password: " + user.password + "<br>" +
+        "DOB: " + user.dob;
+    });
+  </script>
+
+</body>
+</html>
