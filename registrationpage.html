@@ -1,72 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Registration Page</title>
+  <title>Registration</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-light">
 
-  <h2>Simple Registration</h2>
+  <div class="container mt-5">
+    <h2>Registration Form</h2>
 
-  <form id="form">
-    First Name: <input type="text" id="firstName"><br><br>
-    Last Name: <input type="text" id="lastName"><br><br>
-    Email: <input type="text" id="email"><br><br>
-    Password: <input type="password" id="password"><br><br>
-    Date of Birth: <input type="date" id="dob"><br><br>
+    <form id="form">
 
-    <button type="submit">Register</button>
-  </form>
+      <input class="form-control mb-2" id="first" placeholder="First Name">
+      <input class="form-control mb-2" id="last" placeholder="Last Name">
+      <input class="form-control mb-2" id="email" placeholder="Email">
+      <input class="form-control mb-2" id="password" type="password" placeholder="Password (! or ?)">
+      <input class="form-control mb-2" id="dob" type="date">
 
-  <div id="output"></div>
+      <button class="btn btn-primary mt-2">Register</button>
+
+    </form>
+
+    <div id="output" class="mt-3"></div>
+
+  </div>
 
   <script>
-    document.getElementById("form").addEventListener("submit", function(event) {
+    document.getElementById("form").addEventListener("submit", function(e) {
 
-      event.preventDefault(); // stop page refresh
+      e.preventDefault();
 
-      // get values
-      let first = document.getElementById("firstName").value;
-      let last = document.getElementById("lastName").value;
-      let email = document.getElementById("email").value;
-      let password = document.getElementById("password").value;
-      let dob = document.getElementById("dob").value;
+      let f = document.getElementById("first").value;
+      let l = document.getElementById("last").value;
+      let em = document.getElementById("email").value;
+      let p = document.getElementById("password").value;
+      let d = document.getElementById("dob").value;
 
-      // check if any field is empty
-      if (first === "" || last === "" || email === "" || password === "" || dob === "") {
-        document.getElementById("output").innerHTML = "Registration Failed: Fill all fields";
+      // check empty
+      if (f === "" || l === "" || em === "" || p === "" || d === "") {
+        document.getElementById("output").innerHTML =
+          '<div class="alert alert-danger">Fill all fields</div>';
         return;
       }
 
-      // check password for ! or ?
-      if (password.indexOf("!") === -1 && password.indexOf("?") === -1) {
-        document.getElementById("output").innerHTML = "Registration Failed: Password needs ! or ?";
+      // check password
+      if (p.indexOf("!") === -1 && p.indexOf("?") === -1) {
+        document.getElementById("output").innerHTML =
+          '<div class="alert alert-danger">Password needs ! or ?</div>';
         return;
       }
 
-      // turn password into stars
+      // hide password
       let stars = "";
-      for (let i = 0; i < password.length; i++) {
-        stars = stars + "*";
+      for (let i = 0; i < p.length; i++) {
+        stars += "*";
       }
 
-      // create user object
+      // user object
       let user = {
-        firstName: first,
-        lastName: last,
-        email: email,
+        first: f,
+        last: l,
+        email: em,
         password: stars,
-        dob: dob
+        dob: d
       };
 
       // show result
       document.getElementById("output").innerHTML =
-        "Registration Successful<br><br>" +
-        "First Name: " + user.firstName + "<br>" +
-        "Last Name: " + user.lastName + "<br>" +
-        "Email: " + user.email + "<br>" +
-        "Password: " + user.password + "<br>" +
-        "DOB: " + user.dob;
+        '<div class="alert alert-success">' +
+        "Success<br>" +
+        user.first + " " + user.last + "<br>" +
+        user.email + "<br>" +
+        user.password + "<br>" +
+        user.dob +
+        '</div>';
     });
   </script>
 
