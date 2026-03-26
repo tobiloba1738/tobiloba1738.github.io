@@ -7,7 +7,7 @@
 
 <body>
 
-<div class="container">
+<div class="container mt-3">
 
   <h3>Cat Facts</h3>
 
@@ -31,31 +31,38 @@
 
 <script>
 function loadData() {
-  fetch("https://brianobruno.github.io/cats.json")
-    .then(function(response) {
-      return response.json();
+
+  fetch("https://catfact.ninja/facts")
+    .then(function(res) {
+      return res.json();
     })
     .then(function(data) {
-
-      data.facts.sort(function(a, b) {
-        return a.factId - b.factId;
-      });
 
       var table = document.getElementById("body");
       table.innerHTML = "";
 
-      for (var i = 0; i < data.facts.length; i++) {
+      for (var i = 0; i < data.data.length; i++) {
         table.innerHTML +=
           "<tr><td>" +
-          data.facts[i].factId +
+          (i + 1) +
           "</td><td>" +
-          data.facts[i].text +
+          data.data[i].fact +
           "</td></tr>";
       }
 
-      document.getElementById("pic").src = data.catPhoto;
+      fetch("https://catfact.ninja/fact")
+        .then(function(res) {
+          return res.json();
+        })
+        .then(function(oneFact) {
+
+          document.getElementById("pic").src =
+            "https://cataas.com/cat?" + Math.random();
+
+        });
 
     });
+
 }
 </script>
 
